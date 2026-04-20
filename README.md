@@ -64,10 +64,20 @@
 Нужно только:
 - Docker
 - Docker Compose
+- Git
 
 ---
 
 ## Запуск проекта
+
+## Клонирование репозитория
+
+Склонируй проект себе на компьютер:
+
+```bash
+git clone https://github.com/HawHack/Lid.ru.git
+cd Lid.ru
+```
 
 Из корня проекта выполни:
 
