@@ -1,0 +1,916 @@
+basePath: /
+definitions:
+  application.CandidateApplicationItemResponse:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      match:
+        $ref: '#/definitions/application.MatchSummaryResponse'
+      status:
+        type: string
+      vacancy:
+        $ref: '#/definitions/application.VacancySummaryResponse'
+    type: object
+  application.CandidateSummaryResponse:
+    properties:
+      about:
+        type: string
+      experienceYears:
+        type: integer
+      fullName:
+        type: string
+      location:
+        type: string
+      skills:
+        items:
+          type: string
+        type: array
+      userId:
+        type: integer
+      workFormat:
+        type: string
+    type: object
+  application.EmployerApplicationItemResponse:
+    properties:
+      candidate:
+        $ref: '#/definitions/application.CandidateSummaryResponse'
+      createdAt:
+        type: string
+      id:
+        type: integer
+      match:
+        $ref: '#/definitions/application.MatchSummaryResponse'
+      status:
+        type: string
+    type: object
+  application.MatchSummaryResponse:
+    properties:
+      missingSkills:
+        items:
+          $ref: '#/definitions/application.SkillGapResponse'
+        type: array
+      recommendation:
+        type: string
+      score:
+        type: integer
+    type: object
+  application.SkillGapResponse:
+    properties:
+      id:
+        type: integer
+      isRequired:
+        type: boolean
+      name:
+        type: string
+      requiredLevel:
+        type: integer
+    type: object
+  application.VacancySummaryResponse:
+    properties:
+      company:
+        type: string
+      id:
+        type: integer
+      salaryFrom:
+        type: integer
+      salaryTo:
+        type: integer
+      status:
+        type: string
+      title:
+        type: string
+      workFormat:
+        type: string
+    type: object
+  domain.CandidateProfile:
+    properties:
+      about:
+        type: string
+      createdAt:
+        type: string
+      experienceYears:
+        format: int32
+        type: integer
+      fullName:
+        type: string
+      location:
+        type: string
+      updatedAt:
+        type: string
+      userID:
+        format: int64
+        type: integer
+      workFormat:
+        $ref: '#/definitions/domain.WorkFormat'
+    type: object
+  domain.CandidateSkill:
+    properties:
+      candidateID:
+        format: int64
+        type: integer
+      level:
+        format: int32
+        type: integer
+      skillID:
+        format: int64
+        type: integer
+    type: object
+  domain.ChatMessage:
+    properties:
+      applicationID:
+        format: int64
+        type: integer
+      createdAt:
+        type: string
+      id:
+        format: int64
+        type: integer
+      message:
+        type: string
+      senderID:
+        format: int64
+        type: integer
+    type: object
+  domain.Vacancy:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      employerID:
+        format: int64
+        type: integer
+      id:
+        format: int64
+        type: integer
+      isActive:
+        type: boolean
+      salaryFrom:
+        format: int32
+        type: integer
+      salaryTo:
+        format: int32
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        type: string
+      workFormat:
+        $ref: '#/definitions/domain.WorkFormat'
+    type: object
+  domain.WorkFormat:
+    enum:
+    - remote
+    - hybrid
+    - office
+    - project
+    type: string
+    x-enum-varnames:
+    - WorkRemote
+    - WorkHybrid
+    - WorkOffice
+    - WorkProject
+  handler.createEmployerRequest:
+    properties:
+      company_name:
+        type: string
+      description:
+        type: string
+      inn:
+        type: string
+      website:
+        type: string
+    required:
+    - company_name
+    - inn
+    type: object
+  handler.createProfileRequest:
+    properties:
+      about:
+        type: string
+      experience_years:
+        type: integer
+      full_name:
+        type: string
+      location:
+        type: string
+      work_format:
+        type: string
+    required:
+    - full_name
+    - work_format
+    type: object
+  handler.createVacancyRequest:
+    properties:
+      description:
+        type: string
+      salary_from:
+        type: integer
+      salary_to:
+        type: integer
+      title:
+        type: string
+      work_format:
+        type: string
+    required:
+    - description
+    - salary_from
+    - salary_to
+    - title
+    - work_format
+    type: object
+  handler.loginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  handler.refreshRequest:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  handler.sendMessageRequest:
+    properties:
+      message:
+        type: string
+    required:
+    - message
+    type: object
+  handler.skillRequest:
+    properties:
+      level:
+        type: integer
+      skill_id:
+        type: integer
+    required:
+    - level
+    - skill_id
+    type: object
+  handler.updateStatusRequest:
+    properties:
+      status:
+        type: string
+    required:
+    - status
+    type: object
+  vacancy.MatchResponse:
+    properties:
+      missingSkills:
+        items:
+          $ref: '#/definitions/vacancy.SkillResponse'
+        type: array
+      recommendation:
+        type: string
+      score:
+        type: integer
+    type: object
+  vacancy.SkillResponse:
+    properties:
+      id:
+        type: integer
+      isRequired:
+        type: boolean
+      name:
+        type: string
+      requiredLevel:
+        type: integer
+    type: object
+  vacancy.VacancyDetailResponse:
+    properties:
+      company:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      match:
+        $ref: '#/definitions/vacancy.MatchResponse'
+      salaryFrom:
+        type: integer
+      salaryTo:
+        type: integer
+      skills:
+        items:
+          $ref: '#/definitions/vacancy.SkillResponse'
+        type: array
+      status:
+        type: string
+      title:
+        type: string
+      workFormat:
+        type: string
+    type: object
+  vacancy.VacancyListItemResponse:
+    properties:
+      company:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      salaryFrom:
+        type: integer
+      salaryTo:
+        type: integer
+      status:
+        type: string
+      title:
+        type: string
+      workFormat:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Skill-first hiring platform backend.
+  title: Hunter Platform API
+  version: "1.0"
+paths:
+  /applications/{id}/chat:
+    get:
+      parameters:
+      - description: Application ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.ChatMessage'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get chat messages
+      tags:
+      - chat
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Application ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Message
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.sendMessageRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Send chat message
+      tags:
+      - chat
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return access & refresh tokens
+      parameters:
+      - description: Login request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.loginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Login user
+      tags:
+      - auth
+  /auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Revoke refresh token
+      parameters:
+      - description: Logout request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.refreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Logout user
+      tags:
+      - auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Refresh access and refresh tokens
+      parameters:
+      - description: Refresh request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.refreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Refresh tokens
+      tags:
+      - auth
+  /candidate/applications:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/application.CandidateApplicationItemResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get my applications
+      tags:
+      - application
+  /candidate/applications/{id}:
+    post:
+      parameters:
+      - description: Vacancy ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Apply to vacancy
+      tags:
+      - application
+  /candidate/profile:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.CandidateProfile'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get my profile
+      tags:
+      - candidate
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Profile data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.createProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create candidate profile
+      tags:
+      - candidate
+  /candidate/skills:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.CandidateSkill'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get my skills
+      tags:
+      - candidate
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Skill data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.skillRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add or update skill
+      tags:
+      - candidate
+  /candidate/skills/{id}:
+    delete:
+      parameters:
+      - description: Skill ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete my skill
+      tags:
+      - candidate
+  /employer/applications/{id}/status:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Application ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Status payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.updateStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update application status
+      tags:
+      - application
+  /employer/profile:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Employer data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.createEmployerRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create employer profile
+      tags:
+      - employer
+  /employer/vacancies:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Vacancy data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.createVacancyRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.Vacancy'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create vacancy
+      tags:
+      - vacancy
+  /employer/vacancies/{id}/applications:
+    get:
+      parameters:
+      - description: Vacancy ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/application.EmployerApplicationItemResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get applications by vacancy
+      tags:
+      - application
+  /vacancies:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/vacancy.VacancyListItemResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List public vacancies
+      tags:
+      - vacancy
+  /vacancies/{id}:
+    get:
+      parameters:
+      - description: Vacancy ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vacancy.VacancyDetailResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get vacancy details
+      tags:
+      - vacancy
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

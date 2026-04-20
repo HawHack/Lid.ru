@@ -1,0 +1,263 @@
+📁 ./
+│   📄 csr.py
+│   📄 docker-compose.yml
+│   📄 dump.txt
+│   📄 README.md
+│   📄 structure.txt
+│   📁 back/
+│   │   📄 docker-compose.yml
+│   │   📁 backend/
+│   │   │   📄 dockerfile
+│   │   │   📄 go.mod
+│   │   │   📄 go.sum
+│   │   │   📁 cmd/
+│   │   │   │   📁 api/
+│   │   │   │   │   📄 main.go
+│   │   │   📁 docs/
+│   │   │   │   📄 docs.go
+│   │   │   │   📄 swagger.json
+│   │   │   │   📄 swagger.yaml
+│   │   │   📁 internal/
+│   │   │   │   📁 config/
+│   │   │   │   │   📄 config.go
+│   │   │   │   📁 database/
+│   │   │   │   │   📄 mysql.go
+│   │   │   │   📁 domain/
+│   │   │   │   │   📄 application.go
+│   │   │   │   │   📄 candidate.go
+│   │   │   │   │   📄 chat.go
+│   │   │   │   │   📄 employer.go
+│   │   │   │   │   📄 skill.go
+│   │   │   │   │   📄 user.go
+│   │   │   │   │   📄 vacancy.go
+│   │   │   │   📁 dto/
+│   │   │   │   │   📁 application/
+│   │   │   │   │   │   📄 response.go
+│   │   │   │   │   📁 vacancy/
+│   │   │   │   │   │   📄 response.go
+│   │   │   │   📁 handler/
+│   │   │   │   │   📄 application_handler.go
+│   │   │   │   │   📄 auth_handler.go
+│   │   │   │   │   📄 candidate_handler.go
+│   │   │   │   │   📄 chat_handler.go
+│   │   │   │   │   📄 employer_handler.go
+│   │   │   │   │   📄 skill_handler.go
+│   │   │   │   │   📄 user_handler.go
+│   │   │   │   │   📄 vacancy_handler.go
+│   │   │   │   📁 mapper/
+│   │   │   │   │   📄 application_mapper.go
+│   │   │   │   │   📄 matching_mapper.go
+│   │   │   │   │   📄 vacancy_mapper.go
+│   │   │   │   📁 matching/
+│   │   │   │   │   📄 matching_service.go
+│   │   │   │   │   📄 matching_service_test.go
+│   │   │   │   │   📄 models.go
+│   │   │   │   📁 middleware/
+│   │   │   │   │   📄 jwt_middleware.go
+│   │   │   │   │   📄 rbac.go
+│   │   │   │   📁 repository/
+│   │   │   │   │   📄 application_repository.go
+│   │   │   │   │   📄 candidate_repository.go
+│   │   │   │   │   📄 chat_repository.go
+│   │   │   │   │   📄 employer_repository.go
+│   │   │   │   │   📄 refresh_token_repository.go
+│   │   │   │   │   📄 skill_repository.go
+│   │   │   │   │   📄 user_repository.go
+│   │   │   │   │   📄 vacancy_repository.go
+│   │   │   │   │   📁 mysql/
+│   │   │   │   │   │   📄 application_model.go
+│   │   │   │   │   │   📄 application_repository.go
+│   │   │   │   │   │   📄 candidate_model.go
+│   │   │   │   │   │   📄 candidate_repository.go
+│   │   │   │   │   │   📄 chat_model.go
+│   │   │   │   │   │   📄 chat_repository.go
+│   │   │   │   │   │   📄 employer_model.go
+│   │   │   │   │   │   📄 employer_repository.go
+│   │   │   │   │   │   📄 refresh_token_model.go
+│   │   │   │   │   │   📄 refresh_token_repository.go
+│   │   │   │   │   │   📄 skill_model.go
+│   │   │   │   │   │   📄 skill_repository.go
+│   │   │   │   │   │   📄 user_model.go
+│   │   │   │   │   │   📄 user_repository.go
+│   │   │   │   │   │   📄 vacancy_model.go
+│   │   │   │   │   │   📄 vacancy_repository.go
+│   │   │   │   📁 server/
+│   │   │   │   │   📄 server.go
+│   │   │   │   📁 service/
+│   │   │   │   │   📁 application/
+│   │   │   │   │   │   📄 service.go
+│   │   │   │   │   📁 auth/
+│   │   │   │   │   │   📄 jwt.go
+│   │   │   │   │   │   📄 password.go
+│   │   │   │   │   │   📄 service.go
+│   │   │   │   │   │   📄 token_hash.go
+│   │   │   │   │   📁 candidate/
+│   │   │   │   │   │   📄 service.go
+│   │   │   │   │   📁 chat/
+│   │   │   │   │   │   📄 service.go
+│   │   │   │   │   📁 employer/
+│   │   │   │   │   │   📄 service.go
+│   │   │   │   │   📁 vacancy/
+│   │   │   │   │   │   📄 service.go
+│   │   │   📁 mysql-init/
+│   │   │   │   📄 00-schema.sql
+│   │   │   │   📄 01-seed.sql
+│   📁 frontend/
+│   │   📄 .dockerignore
+│   │   📄 .gitignore
+│   │   📄 docker-compose.dev.yml
+│   │   📄 docker-compose.prod.yml
+│   │   📄 Dockerfile
+│   │   📄 eslint.config.js
+│   │   📄 index.html
+│   │   📄 nginx.conf
+│   │   📄 package-lock.json
+│   │   📄 package.json
+│   │   📄 README.md
+│   │   📄 tsconfig.app.json
+│   │   📄 tsconfig.json
+│   │   📄 tsconfig.node.json
+│   │   📄 vite.config.ts
+│   │   📁 dist/
+│   │   │   📄 favicon.svg
+│   │   │   📄 icons.svg
+│   │   │   📄 index.html
+│   │   │   📄 mockServiceWorker.js
+│   │   │   📁 assets/
+│   │   │   │   📄 index-0ADLDTDF.css
+│   │   │   │   📄 index-BXSanSlG.js
+│   │   📁 public/
+│   │   │   📄 favicon.svg
+│   │   │   📄 icons.svg
+│   │   │   📄 mockServiceWorker.js
+│   │   📁 src/
+│   │   │   📄 App.css
+│   │   │   📄 App.tsx
+│   │   │   📄 index.css
+│   │   │   📄 main.tsx
+│   │   │   📄 vite-env.d.ts
+│   │   │   📁 app/
+│   │   │   │   📁 router/
+│   │   │   │   │   📄 index.tsx
+│   │   │   │   │   📄 ProtectedRoute.tsx
+│   │   │   │   │   📄 RouteErrorPage.tsx
+│   │   │   │   📁 store/
+│   │   │   │   │   📄 useAuthStore.ts
+│   │   │   │   │   📄 useEmployerShortlistStore.ts
+│   │   │   │   │   📄 useSavedVacanciesStore.ts
+│   │   │   │   │   📄 useThemeStore.ts
+│   │   │   │   │   📄 useToastStore.ts
+│   │   │   📁 assets/
+│   │   │   │   📄 hero.png
+│   │   │   │   📄 react.svg
+│   │   │   │   📄 vite.svg
+│   │   │   📁 entities/
+│   │   │   │   📁 application/
+│   │   │   │   📁 skill/
+│   │   │   │   📁 user/
+│   │   │   │   📁 vacancy/
+│   │   │   │   │   📄 adapters.ts
+│   │   │   │   │   📄 api.ts
+│   │   │   │   │   📄 dto.ts
+│   │   │   │   │   📄 lib.ts
+│   │   │   │   │   📄 types.ts
+│   │   │   │   │   📁 hooks/
+│   │   │   │   │   │   📄 useCandidateProfile.ts
+│   │   │   │   │   │   📄 useVacancies.ts
+│   │   │   📁 features/
+│   │   │   │   📁 admin/
+│   │   │   │   │   📄 AdminFeedbackComposer.tsx
+│   │   │   │   │   📄 AdminMetricsCards.tsx
+│   │   │   │   │   📄 AdminPage.tsx
+│   │   │   │   │   📄 AdminTrustSummary.tsx
+│   │   │   │   │   📄 AdminTrustVacancyCard.tsx
+│   │   │   │   │   📄 AdminVacancyModerationList.tsx
+│   │   │   │   │   📄 feedback.ts
+│   │   │   │   │   📄 trust.ts
+│   │   │   │   📁 auth/
+│   │   │   │   │   📄 LoginPage.tsx
+│   │   │   │   📁 candidate/
+│   │   │   │   │   📄 CandidateApplicationsPage.tsx
+│   │   │   │   │   📄 CandidateGrowthMetrics.tsx
+│   │   │   │   │   📄 CandidateGrowthPage.tsx
+│   │   │   │   │   📄 CandidateMomentumCard.tsx
+│   │   │   │   │   📄 CandidatePage.tsx
+│   │   │   │   │   📄 CandidateProfilePage.tsx
+│   │   │   │   │   📄 CandidateReadinessHero.tsx
+│   │   │   │   │   📄 CareerMissions.tsx
+│   │   │   │   │   📄 CareerPulseCard.tsx
+│   │   │   │   │   📄 coverLetter.ts
+│   │   │   │   │   📄 CoverLetterStudio.tsx
+│   │   │   │   │   📄 FocusPlan.tsx
+│   │   │   │   │   📄 growth.ts
+│   │   │   │   │   📄 resumeMode.ts
+│   │   │   │   │   📄 ResumeModePanel.tsx
+│   │   │   │   │   📄 SavedVacanciesPage.tsx
+│   │   │   │   │   📄 SmartShortlist.tsx
+│   │   │   │   │   📄 TopSkillGaps.tsx
+│   │   │   │   │   📄 VacancyInsightsPanel.tsx
+│   │   │   │   │   📄 VacancyInterviewPrep.tsx
+│   │   │   │   │   📄 VacancyLearningPath.tsx
+│   │   │   │   │   📄 VacancyPage.tsx
+│   │   │   │   📁 employer/
+│   │   │   │   │   📄 campaigns.ts
+│   │   │   │   │   📄 CandidateCampaignCard.tsx
+│   │   │   │   │   📄 CandidateInterviewKitCard.tsx
+│   │   │   │   │   📄 CandidatePipelineBoard.tsx
+│   │   │   │   │   📄 CandidateRankingCard.tsx
+│   │   │   │   │   📄 CandidateSegmentsBoard.tsx
+│   │   │   │   │   📄 CandidateStatusSelect.tsx
+│   │   │   │   │   📄 CreateVacancyForm.tsx
+│   │   │   │   │   📄 EmployerInterviewKitPanel.tsx
+│   │   │   │   │   📄 EmployerMetricsCards.tsx
+│   │   │   │   │   📄 EmployerPage.tsx
+│   │   │   │   │   📄 EmployerVacancyList.tsx
+│   │   │   │   │   📄 interviewKit.ts
+│   │   │   │   │   📄 ranking.ts
+│   │   │   │   │   📄 TalentCampaignsPanel.tsx
+│   │   │   │   │   📄 TalentSpotlight.tsx
+│   │   │   │   │   📄 VacancyCandidatesPage.tsx
+│   │   │   │   │   📄 vacancyIntelligence.ts
+│   │   │   │   │   📄 VacancyIntelligenceCard.tsx
+│   │   │   │   │   📄 VacancyIntelligenceSummary.tsx
+│   │   │   📁 i18n/
+│   │   │   │   📄 index.ts
+│   │   │   📁 mocks/
+│   │   │   │   📄 browser.ts
+│   │   │   │   📄 handlers.ts
+│   │   │   📁 shared/
+│   │   │   │   📁 api/
+│   │   │   │   │   📄 client.ts
+│   │   │   │   │   📄 handleApi.ts
+│   │   │   │   📁 config/
+│   │   │   │   │   📄 env.ts
+│   │   │   │   📁 lib/
+│   │   │   │   │   📄 auth.ts
+│   │   │   │   │   📄 i18n.ts
+│   │   │   │   📁 types/
+│   │   │   │   📁 ui/
+│   │   │   │   │   📄 AnimatedList.tsx
+│   │   │   │   │   📄 ConfirmDialog.tsx
+│   │   │   │   │   📄 ErrorState.tsx
+│   │   │   │   │   📄 FitBadge.tsx
+│   │   │   │   │   📄 GlassCard.tsx
+│   │   │   │   │   📄 LanguageToggle.tsx
+│   │   │   │   │   📄 MatchScoreCard.tsx
+│   │   │   │   │   📄 Navbar.tsx
+│   │   │   │   │   📄 PageShell.tsx
+│   │   │   │   │   📄 PriorityBadge.tsx
+│   │   │   │   │   📄 ProgressStatCard.tsx
+│   │   │   │   │   📄 RiskBadge.tsx
+│   │   │   │   │   📄 SaveVacancyButton.tsx
+│   │   │   │   │   📄 SectionTitle.tsx
+│   │   │   │   │   📄 SkeletonCard.tsx
+│   │   │   │   │   📄 SkillTag.tsx
+│   │   │   │   │   📄 StatusBadge.tsx
+│   │   │   │   │   📄 ThemeToggle.tsx
+│   │   │   │   │   📄 ToastViewport.tsx
+│   │   │   │   │   📄 VacancyQualityBadge.tsx
+│   │   │   │   │   📄 VacancySupplyBadge.tsx
+│   │   │   📁 widgets/
+│   │   │   │   📁 vacancy_list/
+│   │   │   │   │   📄 VacancyCard.tsx
+│   │   │   │   │   📄 VacancyList.tsx

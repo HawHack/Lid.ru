@@ -1,0 +1,79 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: hunter_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hunter_platform
+      MYSQL_USER: hunter
+      MYSQL_PASSWORD: hunter
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./back/backend/mysql-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping --protocol=tcp -h 127.0.0.1 -P 3306 -uroot -proot --silent"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 45s
+
+  redis:
+    image: redis:7
+    container_name: hunter_redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: ./back/backend
+      dockerfile: dockerfile
+    container_name: hunter_api
+    restart: unless-stopped
+    environment:
+      DB_USER: hunter
+      DB_PASSWORD: hunter
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: hunter_platform
+      JWT_SECRET: supersecret
+      HTTP_PORT: 8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: prod
+    container_name: hunter_frontend
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_started
+    ports:
+      - "3000:80"
+
+volumes:
+  mysql_data:
